@@ -3,8 +3,8 @@ requires = ["hatchling>=1.21"]
 build-backend = "hatchling.build"
 
 [project]
-name = "ftdoctor"
-version = "0.1.0"
+name = "finetune-doctor"
+version = "0.2.0"
 description = "Did your fine-tune overfit? Which checkpoint should you keep? What can you delete? Reads any HuggingFace Trainer run, local or on the Hub."
 readme = "README.md"
 requires-python = ">=3.10"
@@ -33,15 +33,17 @@ dependencies = ["numpy>=1.21"]
 dev = ["pytest>=7.0", "pytest-cov>=4.0", "ruff>=0.6"]
 
 [project.urls]
-Homepage = "https://github.com/junglezke/ftdoctor"
-Repository = "https://github.com/junglezke/ftdoctor"
-Issues = "https://github.com/junglezke/ftdoctor/issues"
+Homepage = "https://github.com/junglezke/finetune-doctor"
+Repository = "https://github.com/junglezke/finetune-doctor"
+Issues = "https://github.com/junglezke/finetune-doctor/issues"
 
 [project.scripts]
-ftdoctor = "ftdoctor.cli:main"
+finetune-doctor = "finetune_doctor.cli:main"
+# Short alias, and the command this project shipped under as `ftdoctor` 0.1.0.
+ftdoctor = "finetune_doctor.cli:main"
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/ftdoctor"]
+packages = ["src/finetune_doctor"]
 
 [tool.ruff]
 line-length = 100

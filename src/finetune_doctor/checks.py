@@ -298,7 +298,7 @@ def _keep_line(p: Pick) -> Optional[str]:
     if not p.checkpoints_known:
         return (
             f"Use the checkpoint from step {p.best_step} if you saved one -- this log does not say "
-            "which checkpoints still exist. Point ftdoctor at the output directory to check."
+            "which checkpoints still exist. Point finetune-doctor at the output directory to check."
         )
     return None
 
@@ -794,7 +794,7 @@ def incomplete(history: History) -> Optional[Finding]:
         ),
         fix=[
             "If it crashed, resume with trainer.train(resume_from_checkpoint=True). If it is "
-            "still running, run ftdoctor again at the end.",
+            "still running, run finetune-doctor again at the end.",
         ],
         metrics={"completed_frac": frac},
     )

@@ -1,11 +1,11 @@
 """Command line.
 
-    ftdoctor ./outputs                       # a training output directory
-    ftdoctor ./outputs/checkpoint-1200       # or one checkpoint
-    ftdoctor trainer_state.json              # or the file
-    ftdoctor someone/their-finetuned-model   # or a model on the HuggingFace Hub
-    ftdoctor prune ./outputs                 # show what can be deleted
-    ftdoctor prune ./outputs --apply         # ...and delete it
+    finetune-doctor ./outputs                       # a training output directory
+    finetune-doctor ./outputs/checkpoint-1200       # or one checkpoint
+    finetune-doctor trainer_state.json              # or the file
+    finetune-doctor someone/their-finetuned-model   # or a model on the HuggingFace Hub
+    finetune-doctor prune ./outputs                 # show what can be deleted
+    finetune-doctor prune ./outputs --apply         # ...and delete it
 """
 
 from __future__ import annotations
@@ -31,12 +31,12 @@ def _common(parser: argparse.ArgumentParser) -> None:
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
-        prog="ftdoctor",
+        prog="finetune-doctor",
         description="Did your fine-tune overfit? Which checkpoint should you keep? What can you delete?",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog=__doc__,
     )
-    parser.add_argument("--version", action="version", version=f"ftdoctor {__version__}")
+    parser.add_argument("--version", action="version", version=f"finetune-doctor {__version__}")
     sub = parser.add_subparsers(dest="command")
 
     diag = sub.add_parser("diagnose", help="diagnose a run (the default command)")
@@ -64,7 +64,7 @@ def build_parser() -> argparse.ArgumentParser:
 
 def main(argv: Optional[List[str]] = None) -> int:
     argv = list(sys.argv[1:] if argv is None else argv)
-    # `ftdoctor TARGET` is shorthand for `ftdoctor diagnose TARGET`.
+    # `finetune-doctor TARGET` is shorthand for `finetune-doctor diagnose TARGET`.
     if argv and argv[0] not in ("diagnose", "prune", "-h", "--help", "--version"):
         argv.insert(0, "diagnose")
     parser = build_parser()
@@ -76,7 +76,7 @@ def main(argv: Optional[List[str]] = None) -> int:
         history = load(args.target)
         result = diagnose(history, metric=args.metric, higher_is_better=args.higher)
     except (OSError, ValueError, KeyError) as exc:
-        print(f"ftdoctor: {exc}", file=sys.stderr)
+        print(f"finetune-doctor: {exc}", file=sys.stderr)
         return 2
 
     if args.command == "prune":
@@ -102,7 +102,7 @@ def _prune(result, args) -> int:
 
     p = plan(result, mode=args.mode, keep_extra=args.keep)
     if p.refused:
-        print(f"ftdoctor: {p.refused}", file=sys.stderr)
+        print(f"finetune-doctor: {p.refused}", file=sys.stderr)
         return 2
     lines = [
         "",

@@ -1,5 +1,5 @@
 {
-  "_comment": "Public fine-tuning logs ftdoctor is validated against, chosen from a sweep of 89 public trainer_state.json files to cover every check. Raw logs are downloaded into validation/.cache/ (gitignored) by fetch.py and never committed: they belong to their authors. `expect` pins every finding and its severity, so a change that alters a real-run verdict fails `python validation/run.py --check`.",
+  "_comment": "Public fine-tuning logs finetune-doctor is validated against, chosen from a sweep of 89 public trainer_state.json files to cover every check. Raw logs are downloaded into validation/.cache/ (gitignored) by fetch.py and never committed: they belong to their authors. `expect` pins every finding and its severity, so a change that alters a real-run verdict fails `python validation/run.py --check`.",
   "runs": [
     {
       "id": "audio-classifier-accuracy",

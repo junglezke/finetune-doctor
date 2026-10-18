@@ -1,4 +1,4 @@
-"""Tests for ftdoctor.
+"""Tests for finetune-doctor.
 
 The checks were calibrated against 89 public fine-tuning logs. Several tests
 here pin a shape found in one of them, and say which.
@@ -14,10 +14,10 @@ import numpy as np
 import pytest
 from helpers import make_output_dir, make_state
 
-from ftdoctor import Severity, diagnose, hub, load, metrics, picker, prune
-from ftdoctor.cli import main
-from ftdoctor.history import from_trainer_state
-from ftdoctor.report import render
+from finetune_doctor import Severity, diagnose, hub, load, metrics, picker, prune
+from finetune_doctor.cli import main
+from finetune_doctor.history import from_trainer_state
+from finetune_doctor.report import render
 
 
 def _diag(state, **kw):
@@ -387,7 +387,7 @@ def test_cli_prune_is_a_dry_run_by_default(tmp_path, capsys):
 
 def test_cli_bad_target(capsys):
     assert main(["no_such_trainer_state.json"]) == 2
-    assert "ftdoctor:" in capsys.readouterr().err
+    assert "finetune-doctor:" in capsys.readouterr().err
 
 
 def test_headline_is_one_line(tmp_path):

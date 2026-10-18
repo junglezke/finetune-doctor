@@ -1,8 +1,8 @@
-# Contributing to ftdoctor
+# Contributing to finetune-doctor
 
 ## The most valuable thing you can send
 
-**A run where ftdoctor is wrong.** It flagged a fine run, missed a real problem,
+**A run where finetune-doctor is wrong.** It flagged a fine run, missed a real problem,
 or recommended the wrong checkpoint. A public Hub model id is enough -- or attach
 the `trainer_state.json`. There is an issue template for it.
 
@@ -27,7 +27,7 @@ something real.
 
 ## Adding a check
 
-A function in `src/ftdoctor/checks.py` that returns a `Finding` or `None`, and an
+A function in `src/finetune_doctor/checks.py` that returns a `Finding` or `None`, and an
 entry in `run_all`. Return `None` when there is nothing to say: a report full of
 green ticks buries the line that matters. Put the numbers you fired on in
 `evidence` and a concrete change in `fix`.

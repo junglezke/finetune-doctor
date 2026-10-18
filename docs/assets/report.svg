@@ -3,10 +3,10 @@
 <circle cx="24" cy="22" r="6" fill="#f7768e"/>
 <circle cx="44" cy="22" r="6" fill="#e0af68"/>
 <circle cx="64" cy="22" r="6" fill="#9ece6a"/>
-<text x="463" y="27" fill="#565f89" font-size="12" text-anchor="middle">ftdoctor anshpunia8597/mistral-7b-medical-qa-finetuned</text>
-<text x="38.8" y="56.0" fill="#7dcfff" font-weight="600" textLength="67.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve">ftdoctor</text>
-<text x="106.0" y="56.0" fill="#565f89" textLength="50.4" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> 0.1.0</text>
-<text x="181.6" y="56.0" fill="#c0caf5" font-weight="600" textLength="378.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve">anshpunia8597/mistral-7b-medical-qa-finetuned</text>
+<text x="463" y="27" fill="#565f89" font-size="12" text-anchor="middle">finetune-doctor anshpunia8597/mistral-7b-medical-qa-finetuned</text>
+<text x="38.8" y="56.0" fill="#7dcfff" font-weight="600" textLength="126.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve">finetune-doctor</text>
+<text x="164.8" y="56.0" fill="#565f89" textLength="50.4" lengthAdjust="spacingAndGlyphs" xml:space="preserve"> 0.2.0</text>
+<text x="240.4" y="56.0" fill="#c0caf5" font-weight="600" textLength="378.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve">anshpunia8597/mistral-7b-medical-qa-finetuned</text>
 <text x="38.8" y="75.0" fill="#565f89" textLength="722.4" lengthAdjust="spacingAndGlyphs" xml:space="preserve">──────────────────────────────────────────────────────────────────────────────────────</text>
 <text x="38.8" y="94.0" fill="#565f89" textLength="571.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve">1386 steps · 3 epochs · 13 evals · 3 checkpoints on the Hub (2.8 GB)</text>
 <text x="38.8" y="113.0" fill="#565f89" textLength="865.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve">ranked on eval loss (lower is better) -- the metric your Trainer selected on (it matches `best_metric`)</text>

@@ -1,6 +1,6 @@
 """Read a run straight from a model repository on the HuggingFace Hub.
 
-    ftdoctor diagnose someone/their-finetuned-model
+    finetune-doctor diagnose someone/their-finetuned-model
 
 Thousands of public fine-tunes upload ``trainer_state.json`` next to their
 weights, usually without the author ever looking at it again. This module
@@ -49,7 +49,7 @@ def looks_like_repo_id(target: str) -> bool:
 
 
 def _request(url: str, timeout: int = 60) -> bytes:
-    headers = {"User-Agent": "ftdoctor"}
+    headers = {"User-Agent": "finetune-doctor"}
     token = os.environ.get("HF_TOKEN") or os.environ.get("HUGGING_FACE_HUB_TOKEN")
     if token and url.startswith(_endpoint()):
         headers["Authorization"] = f"Bearer {token}"

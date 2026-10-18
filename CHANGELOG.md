@@ -1,12 +1,21 @@
 # Changelog
 
-## [0.1.0] — 2026-10-04
+## [0.2.0] — 2026-10-18
+
+### Changed
+
+- **Renamed from `ftdoctor` to `finetune-doctor`**: PyPI package `finetune-doctor`, import
+  name `finetune_doctor`, repository `junglezke/finetune-doctor`. The `ftdoctor` command
+  still works as a short alias, and `FTDOCTOR_ASCII` is still honoured alongside the new
+  `FINETUNE_DOCTOR_ASCII`. No behaviour changes.
+
+## [0.1.0] — 2026-10-04 (published as `ftdoctor`)
 
 First release.
 
 ### Added
 
-- `ftdoctor <target>` for a training output directory, a single checkpoint, a
+- `finetune-doctor <target>` for a training output directory, a single checkpoint, a
   `trainer_state.json`, or a model on the HuggingFace Hub (`owner/model`).
 - Noise-aware checkpoint selection: a band of 2x the eval's own step-to-step
   noise (or 1%), restricted to checkpoints that actually exist on disk or on
@@ -18,7 +27,7 @@ First release.
   (including periodic and epoch-boundary jumps), gradient spikes, zero
   gradients and fp16 overflow, zero-learning-rate tails, eval below train,
   unfinished runs. RL runs are recognised and handed to rldoctor.
-- `ftdoctor prune`: strip resume-only state or delete whole checkpoints, dry
+- `finetune-doctor prune`: strip resume-only state or delete whole checkpoints, dry
   run by default, every path re-checked before deletion.
 - Terminal, Markdown and JSON reports; `--fail-on` for CI.
 - `validation/`: ten public runs with pinned verdicts, chosen from a sweep of 89.

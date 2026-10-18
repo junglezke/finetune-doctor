@@ -6,7 +6,7 @@
 
 import sys
 
-from ftdoctor import Severity, diagnose, load
+from finetune_doctor import Severity, diagnose, load
 
 target = sys.argv[1] if len(sys.argv) > 1 else "anshpunia8597/mistral-7b-medical-qa-finetuned"
 result = diagnose(load(target))

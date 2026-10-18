@@ -2,7 +2,7 @@
 
     python tools/make_banner.py
 
-The banner is ftdoctor's real output on a public model, read live from the Hub,
+The banner is finetune-doctor's real output on a public model, read live from the Hub,
 so the image cannot drift from what the tool prints. Needs network access.
 """
 
@@ -15,8 +15,8 @@ sys.path.insert(0, str(HERE.parent / "src"))
 
 from ansi2svg import render  # noqa: E402
 
-from ftdoctor import diagnose, load  # noqa: E402
-from ftdoctor.report import render_terminal  # noqa: E402
+from finetune_doctor import diagnose, load  # noqa: E402
+from finetune_doctor.report import render_terminal  # noqa: E402
 
 REPO = "anshpunia8597/mistral-7b-medical-qa-finetuned"
 
@@ -25,7 +25,7 @@ def main() -> None:
     lines = render_terminal(diagnose(load(REPO)), width=90, color=True, unicode=True).split("\n")
     # Header, the keep block and its table: the answer people open the report for.
     stop = next(i for i, line in enumerate(lines) if "FINDINGS" in line)
-    svg = render("\n".join(lines[1:stop]).rstrip(), f"ftdoctor {REPO}")
+    svg = render("\n".join(lines[1:stop]).rstrip(), f"finetune-doctor {REPO}")
     out = HERE.parent / "docs" / "assets" / "report.svg"
     out.write_text(svg, encoding="utf-8")
     print(f"wrote {out}")

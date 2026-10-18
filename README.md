@@ -1,18 +1,18 @@
 <div align="center">
 
-# ftdoctor
+# finetune-doctor
 
 **Did your fine-tune overfit? Which checkpoint should you keep? What can you delete?**
 
 Point it at a training output folder — or at any model on the HuggingFace Hub — and get
 the answer in a second.
 
-[![CI](https://github.com/junglezke/ftdoctor/actions/workflows/ci.yml/badge.svg)](https://github.com/junglezke/ftdoctor/actions/workflows/ci.yml)
-[![PyPI](https://img.shields.io/pypi/v/ftdoctor.svg)](https://pypi.org/project/ftdoctor/)
-[![Python](https://img.shields.io/pypi/pyversions/ftdoctor.svg)](https://pypi.org/project/ftdoctor/)
+[![CI](https://github.com/junglezke/finetune-doctor/actions/workflows/ci.yml/badge.svg)](https://github.com/junglezke/finetune-doctor/actions/workflows/ci.yml)
+[![PyPI](https://img.shields.io/pypi/v/finetune-doctor.svg)](https://pypi.org/project/finetune-doctor/)
+[![Python](https://img.shields.io/pypi/pyversions/finetune-doctor.svg)](https://pypi.org/project/finetune-doctor/)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](LICENSE)
 
-<img src="docs/assets/report.svg" alt="ftdoctor on a public Mistral-7B fine-tune: keep checkpoint-500; the best eval at step 900 was never saved; the last eval is 6% worse" width="100%">
+<img src="docs/assets/report.svg" alt="finetune-doctor on a public Mistral-7B fine-tune: keep checkpoint-500; the best eval at step 900 was never saved; the last eval is 6% worse" width="100%">
 
 </div>
 
@@ -25,13 +25,14 @@ leave the full training history in `trainer_state.json`, and almost nobody reads
 ## Try it on a public model — no install of anything else, no GPU
 
 ```bash
-pip install ftdoctor
-ftdoctor anshpunia8597/mistral-7b-medical-qa-finetuned
+pip install finetune-doctor
+finetune-doctor anshpunia8597/mistral-7b-medical-qa-finetuned
 ```
 
-Or the latest from `main`: `pip install git+https://github.com/junglezke/ftdoctor`.
+Or the latest from `main`: `pip install git+https://github.com/junglezke/finetune-doctor`.
+`ftdoctor` works as a short alias for the command; it is also the name 0.1.0 shipped under.
 
-That is the banner above: a real Mistral-7B fine-tune on the Hub. ftdoctor reads its
+That is the banner above: a real Mistral-7B fine-tune on the Hub. finetune-doctor reads its
 `trainer_state.json` and the checkpoint folders the repo actually holds, and says:
 
 - the best eval was at **step 900 — which was never saved**, so you cannot have it;
@@ -41,13 +42,13 @@ That is the banner above: a real Mistral-7B fine-tune on the Hub. ftdoctor reads
 ## On your own run
 
 ```bash
-ftdoctor ./outputs                    # the folder with checkpoint-*/ in it
-ftdoctor ./outputs/checkpoint-1200    # or any one checkpoint
-ftdoctor trainer_state.json           # or just the file
+finetune-doctor ./outputs                    # the folder with checkpoint-*/ in it
+finetune-doctor ./outputs/checkpoint-1200    # or any one checkpoint
+finetune-doctor trainer_state.json           # or just the file
 ```
 
 ```python
-from ftdoctor import load, diagnose
+from finetune_doctor import load, diagnose
 
 result = diagnose(load("./outputs"))
 print(result.headline)          # outputs: keep checkpoint-1000; overfitting.
@@ -61,8 +62,8 @@ checkpoints behind. Most of each one is optimizer state you only need to *resume
 training.
 
 ```bash
-ftdoctor prune ./outputs            # show the plan -- deletes nothing
-ftdoctor prune ./outputs --apply    # do it
+finetune-doctor prune ./outputs            # show the plan -- deletes nothing
+finetune-doctor prune ./outputs --apply    # do it
 ```
 
 By default `prune` keeps the recommended checkpoint and the latest one untouched, and from
@@ -76,7 +77,7 @@ kept.
 
 ## What 89 public fine-tunes look like
 
-To calibrate the checks, ftdoctor was run on **89 `trainer_state.json` files** published on
+To calibrate the checks, finetune-doctor was run on **89 `trainer_state.json` files** published on
 the Hub — LLM SFT and QLoRA runs, Whisper, BERT, audio classifiers. 88 were supervised
 fine-tunes; one turned out to be an RL run (more on that below).
 
@@ -96,14 +97,14 @@ And a few things only real logs turn up:
   the epoch boundary computes its loss differently. The usual advice for loss spikes (lower
   the learning rate) would have been wrong.
 - **Loss of exactly 0.0 from the first step — which was fine.** A Gemma-3-12B run whose
-  name said SFT logged a loss of 0.0 from step one. An early version of ftdoctor called it
+  name said SFT logged a loss of 0.0 from step one. An early version of finetune-doctor called it
   "trained on nothing, labels masked". It was a GRPO run, where a loss near zero is normal.
-  ftdoctor now recognises RL runs, skips the loss-based checks instead of misreading them,
+  finetune-doctor now recognises RL runs, skips the loss-based checks instead of misreading them,
   and hands them to [rldoctor](https://github.com/junglezke/rldoctor). (For a genuinely
-  zero loss in SFT, the usual cause *is* every label masked to `-100` — and ftdoctor says so.)
+  zero loss in SFT, the usual cause *is* every label masked to `-100` — and finetune-doctor says so.)
 - **Eval loss up 37%, accuracy still improving.** An audio classifier selected on accuracy.
   Judged on loss it overfit badly; judged on the metric its author actually chose, the last
-  checkpoint was the best. ftdoctor recovers that choice from `best_metric` and says so.
+  checkpoint was the best. finetune-doctor recovers that choice from `best_metric` and says so.
 - **`inf` gradients that do not matter.** A Mistral run logged `grad_norm = inf` at 10
   scattered steps out of 34,000. Under fp16 that is the loss scaler skipping an overflowing
   step — harmless, and telling someone to roll back over it would be wrong.
@@ -136,7 +137,7 @@ is larger) of the best is reported as equivalent. "Your last checkpoint is 1.2% 
 only said when 1.2% is more than the eval's jitter.
 
 **Your metric, not ours.** `trainer_state.json` records `best_metric` but not which metric
-it was. ftdoctor finds the eval series that contains that exact value at `best_global_step`
+it was. finetune-doctor finds the eval series that contains that exact value at `best_global_step`
 and ranks on it — accuracy, WER, BLEU, whatever you selected on. Direction (higher or lower
 is better) comes from the name, and is checked against which extreme the Trainer kept. Use
 `--metric` to override.
@@ -144,7 +145,7 @@ is better) comes from the name, and is checked against which extreme the Trainer
 **Only checkpoints that exist.** The best eval often lands on a step that was never saved,
 or was deleted by `save_total_limit`. Checkpoints are taken from the folders really present
 — on disk or on the Hub — never inferred from `save_steps`, which is meaningless under
-`save_strategy="epoch"`. Given only a bare `trainer_state.json`, ftdoctor says it cannot
+`save_strategy="epoch"`. Given only a bare `trainer_state.json`, finetune-doctor says it cannot
 tell which checkpoints exist instead of guessing.
 
 **Calibrated on real runs.** Every threshold was set against the 89 public runs above, and
@@ -168,7 +169,7 @@ rule mistook the normal early-training decline for spikes. Ten of those runs are
 ## In CI
 
 ```bash
-ftdoctor ./outputs --fail-on warning --format markdown -o "$GITHUB_STEP_SUMMARY"
+finetune-doctor ./outputs --fail-on warning --format markdown -o "$GITHUB_STEP_SUMMARY"
 ```
 
 Exits non-zero when a finding at that severity fires, and writes a Markdown report for the
@@ -176,7 +177,7 @@ job summary.
 
 ## Related
 
-ftdoctor is for supervised fine-tuning. For **RL post-training** (GRPO, PPO, RLVR) — reward
+finetune-doctor is for supervised fine-tuning. For **RL post-training** (GRPO, PPO, RLVR) — reward
 hacking, entropy collapse, degenerate groups — see
 [**rldoctor**](https://github.com/junglezke/rldoctor), and to test the reward function
 itself, [**rewardlint**](https://github.com/junglezke/rewardlint).
@@ -184,7 +185,7 @@ itself, [**rewardlint**](https://github.com/junglezke/rewardlint).
 ## Development
 
 ```bash
-git clone https://github.com/junglezke/ftdoctor && cd ftdoctor
+git clone https://github.com/junglezke/finetune-doctor && cd finetune-doctor
 pip install -e ".[dev]"
 pytest                                                      # 59 tests
 python validation/fetch.py && python validation/run.py --check   # the public runs
@@ -193,7 +194,7 @@ python tools/make_banner.py                                 # regenerate the REA
 
 ## Contributing
 
-**The most useful thing you can send is a run where ftdoctor is wrong** — it called a fine
+**The most useful thing you can send is a run where finetune-doctor is wrong** — it called a fine
 run broken, or missed something real. A link to a public model with a `trainer_state.json`
 is enough. There is an issue template for it.
 

@@ -8,7 +8,7 @@ the input. It can arrive as:
 * the file itself,
 * a training output directory (``./outputs/``) containing ``checkpoint-*/``,
 * a single ``checkpoint-N/`` directory,
-* a model repository on the HuggingFace Hub (see :mod:`ftdoctor.hub`).
+* a model repository on the HuggingFace Hub (see :mod:`finetune_doctor.hub`).
 
 Which checkpoints actually *exist* matters more than it looks. A recommendation
 to "keep checkpoint-480" is useless when ``save_total_limit`` deleted it, or

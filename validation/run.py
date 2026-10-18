@@ -19,7 +19,7 @@ import sys
 HERE = pathlib.Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parent / "src"))
 
-from ftdoctor import diagnose, load  # noqa: E402
+from finetune_doctor import diagnose, load  # noqa: E402
 
 
 def main() -> int:

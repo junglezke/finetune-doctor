@@ -1,6 +1,6 @@
-"""ftdoctor -- did your fine-tune overfit, which checkpoint should you keep, what can you delete.
+"""finetune-doctor -- did your fine-tune overfit, which checkpoint should you keep, what can you delete.
 
-    from ftdoctor import load, diagnose
+    from finetune_doctor import load, diagnose
 
     result = diagnose(load("./outputs"))          # or a trainer_state.json, or "owner/model"
     print(result.headline)
