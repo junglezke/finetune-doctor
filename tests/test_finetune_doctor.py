@@ -422,7 +422,7 @@ def test_rl_runs_are_recognised_and_not_misread():
     found = _checks(_diag(state))
     assert "rl_run" in found
     assert "loss_degenerate" not in found and "no_eval" not in found
-    assert "rldoctor" in " ".join(found["rl_run"].fix)
+    assert "rl-doctor" in " ".join(found["rl_run"].fix)
 
 
 def test_dpo_is_not_mistaken_for_rl():

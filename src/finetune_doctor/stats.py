@@ -1,4 +1,4 @@
-"""Robust statistics. Shared lineage with rldoctor's stats module.
+"""Robust statistics. Shared lineage with rl-doctor's stats module.
 
 Training curves are noisy and heavy-tailed, and a handful of bad batches should
 not decide which checkpoint you keep. Everything here is rank- or median-based,

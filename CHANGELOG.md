@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.1] — 2026-10-18
+
+### Changed
+
+- The hand-off message for RL runs now points to `rl-doctor` (renamed from rldoctor), and
+  the README links to rl-doctor and reward-doctor (renamed from rewardlint).
+
 ## [0.2.0] — 2026-10-18
 
 ### Changed
@@ -26,7 +33,7 @@ First release.
   disagreement, no eval, NaN / zero loss, loss flat or rising, loss spikes
   (including periodic and epoch-boundary jumps), gradient spikes, zero
   gradients and fp16 overflow, zero-learning-rate tails, eval below train,
-  unfinished runs. RL runs are recognised and handed to rldoctor.
+  unfinished runs. RL runs are recognised and handed to rl-doctor.
 - `finetune-doctor prune`: strip resume-only state or delete whole checkpoints, dry
   run by default, every path re-checked before deletion.
 - Terminal, Markdown and JSON reports; `--fail-on` for CI.

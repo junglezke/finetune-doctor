@@ -100,7 +100,7 @@ And a few things only real logs turn up:
   name said SFT logged a loss of 0.0 from step one. An early version of finetune-doctor called it
   "trained on nothing, labels masked". It was a GRPO run, where a loss near zero is normal.
   finetune-doctor now recognises RL runs, skips the loss-based checks instead of misreading them,
-  and hands them to [rldoctor](https://github.com/junglezke/rldoctor). (For a genuinely
+  and hands them to [rl-doctor](https://github.com/junglezke/rl-doctor). (For a genuinely
   zero loss in SFT, the usual cause *is* every label masked to `-100` — and finetune-doctor says so.)
 - **Eval loss up 37%, accuracy still improving.** An audio classifier selected on accuracy.
   Judged on loss it overfit badly; judged on the metric its author actually chose, the last
@@ -119,7 +119,7 @@ And a few things only real logs turn up:
 | **Loss vs your metric** | eval loss rising while accuracy / WER / BLEU improves — not overfitting in the sense you care about |
 | **No eval** | and the exact `TrainingArguments` to fix it |
 | **Broken loss** | NaN loss; loss of exactly zero (masked labels) |
-| **RL runs** | recognised and handed to rldoctor, not misread as a broken SFT |
+| **RL runs** | recognised and handed to rl-doctor, not misread as a broken SFT |
 | **Not learning** | loss flat or rising, with the learning rate that explains it |
 | **Loss spikes** | real spikes, periodic ones, and ones that land on epoch boundaries — each with different advice |
 | **Gradients** | exactly-zero gradients (nothing trainable), spikes that the loss felt, fp16 overflow that it didn't |
@@ -179,8 +179,8 @@ job summary.
 
 finetune-doctor is for supervised fine-tuning. For **RL post-training** (GRPO, PPO, RLVR) — reward
 hacking, entropy collapse, degenerate groups — see
-[**rldoctor**](https://github.com/junglezke/rldoctor), and to test the reward function
-itself, [**rewardlint**](https://github.com/junglezke/rewardlint).
+[**rl-doctor**](https://github.com/junglezke/rl-doctor), and to test the reward function
+itself, [**reward-doctor**](https://github.com/junglezke/reward-doctor).
 
 ## Development
 

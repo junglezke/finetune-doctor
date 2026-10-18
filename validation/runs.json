@@ -46,7 +46,7 @@
       "id": "gemma-3-12b-grpo-is-rl",
       "source": "https://huggingface.co/WMTH-100d2exam/gemma-3-12b-it-matura-history-sft-grpo-closed-lora-r32",
       "file": "trainer_state.json",
-      "what_is_true": "A GRPO run, not SFT: its logged loss is 0.0 from the first step, which is normal for GRPO. An earlier version diagnosed it as 'trained on nothing, labels masked'. It must be recognised as RL and handed to rldoctor, with no loss-based verdicts.",
+      "what_is_true": "A GRPO run, not SFT: its logged loss is 0.0 from the first step, which is normal for GRPO. An earlier version diagnosed it as 'trained on nothing, labels masked'. It must be recognised as RL and handed to rl-doctor, with no loss-based verdicts.",
       "expect": {
         "rl_run": "INFO",
         "incomplete": "INFO"

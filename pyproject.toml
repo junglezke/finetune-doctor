@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "finetune-doctor"
-version = "0.2.0"
+version = "0.2.1"
 description = "Did your fine-tune overfit? Which checkpoint should you keep? What can you delete? Reads any HuggingFace Trainer run, local or on the Hub."
 readme = "README.md"
 requires-python = ">=3.10"
