@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.2] — 2026-10-19
+
+### Fixed
+
+- The hand-off message for RL runs said `pip install rl-doctor`, which does not exist on PyPI:
+  rl-doctor keeps the PyPI name `rldoctor`. It now says `pip install rldoctor && rl-doctor diagnose …`.
+
 ## [0.2.1] — 2026-10-18
 
 ### Changed

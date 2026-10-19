@@ -78,7 +78,7 @@ def rl_run(history: History) -> Finding:
         fix=[
             "For GRPO / PPO / RLVR diagnosis -- degenerate groups, entropy collapse, reward "
             "hacking, truncation -- use rl-doctor on the same file: "
-            "pip install rl-doctor && rl-doctor diagnose trainer_state.json",
+            "pip install rldoctor && rl-doctor diagnose trainer_state.json",
         ],
     )
 

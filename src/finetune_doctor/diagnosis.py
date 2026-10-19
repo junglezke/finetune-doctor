@@ -9,7 +9,7 @@ from . import checks, metrics, picker
 from .findings import Finding, Severity
 from .history import History
 
-__version__ = "0.2.1"
+__version__ = "0.2.2"
 
 
 @dataclass
